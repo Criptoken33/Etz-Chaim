@@ -21,20 +21,20 @@ const DecisionSimulator: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#1D1B20] rounded-[24px] p-6 md:p-8 shadow-sm border border-[#49454F] md:max-w-2xl mx-auto">
-      <div className="text-center mb-8">
+    <div className="w-full bg-[#1D1B20] rounded-[24px] p-5 md:p-8 shadow-sm border border-[#49454F] max-w-full md:max-w-2xl mx-auto mb-20 md:mb-0">
+      <div className="text-center mb-6 md:mb-8">
          <div className="w-12 h-12 bg-[#4A4458] rounded-full flex items-center justify-center mx-auto mb-4 text-[#E6E1E5]">
             <span className="material-symbols-rounded text-2xl">psychology_alt</span>
          </div>
          <h2 className="text-2xl md:text-3xl font-serif text-[#E6E1E5] mb-2">Oráculo Cabalístico</h2>
-         <p className="text-[#CAC4D0] text-sm md:text-base max-w-md mx-auto">
+         <p className="text-[#CAC4D0] text-sm md:text-base max-w-md mx-auto leading-relaxed">
            Describe tu situación o dilema. La IA analizará los desequilibrios en el Árbol y sugerirá un camino de armonía.
          </p>
       </div>
 
       <div className="relative mb-6">
         <textarea
-          className="peer w-full h-40 bg-[#2B2930] border-b-2 border-[#938F99] rounded-t-xl p-4 text-[#E6E1E5] focus:border-[#FFDDA2] focus:outline-none transition-colors resize-none placeholder-transparent"
+          className="peer w-full h-40 bg-[#2B2930] border-b-2 border-[#938F99] rounded-t-xl p-4 text-[#E6E1E5] focus:border-[#FFDDA2] focus:outline-none transition-colors resize-none placeholder-transparent text-base"
           placeholder="Describe tu situación..."
           id="situationInput"
           value={input}
@@ -51,10 +51,10 @@ const DecisionSimulator: React.FC = () => {
       <button
         onClick={handleAnalyze}
         disabled={loading || !input}
-        className={`w-full py-3.5 rounded-full font-bold tracking-wide transition-all flex items-center justify-center gap-2 ${
+        className={`w-full py-4 md:py-3.5 rounded-full font-bold tracking-wide transition-all flex items-center justify-center gap-2 touch-manipulation ${
           loading || !input
             ? 'bg-[#1D1B20] text-[#49454F] border border-[#49454F] cursor-not-allowed'
-            : 'bg-[#FFDDA2] text-[#251A00] hover:shadow-lg hover:bg-[#FFDDA2]/90'
+            : 'bg-[#FFDDA2] text-[#251A00] hover:shadow-lg hover:bg-[#FFDDA2]/90 active:scale-95'
         }`}
       >
         {loading ? (
@@ -71,14 +71,14 @@ const DecisionSimulator: React.FC = () => {
       </button>
 
       {analysis && (
-        <div className="mt-8 animate-fade-in bg-[#2B2930] p-6 rounded-2xl border border-[#49454F]">
+        <div className="mt-8 animate-fade-in bg-[#2B2930] p-5 md:p-6 rounded-2xl border border-[#49454F]">
           <h3 className="text-lg font-serif text-[#FFDDA2] mb-4 flex items-center gap-2 border-b border-[#49454F] pb-2">
              <span className="material-symbols-rounded">menu_book</span> Lectura del Árbol
           </h3>
           <div className="prose prose-invert prose-p:text-[#E6E1E5] prose-strong:text-[#FFDDA2] prose-sm max-w-none leading-relaxed">
              {/* Simple markdown rendering */}
              {analysis.split('\n').map((line, i) => (
-                <p key={i} className="mb-2">{line}</p>
+                <p key={i} className="mb-2 last:mb-0">{line}</p>
              ))}
           </div>
         </div>

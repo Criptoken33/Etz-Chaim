@@ -25,8 +25,8 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({ onSelectSefira, onSelec
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center overflow-hidden p-4">
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full max-w-lg drop-shadow-2xl">
+    <div className="w-full h-full flex justify-center items-center overflow-visible p-2 md:p-4">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto max-h-[80vh] max-w-lg md:max-w-2xl drop-shadow-2xl touch-manipulation">
         <defs>
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
@@ -45,6 +45,16 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({ onSelectSefira, onSelec
             <g key={path.id} 
                onClick={() => onSelectPath(path.id)} 
                className="cursor-pointer group hover:opacity-100 opacity-80 transition-opacity duration-300">
+              
+              {/* Invisible wide stroke for better touch target */}
+              <line 
+                x1={start.x} y1={start.y} 
+                x2={end.x} y2={end.y} 
+                stroke="transparent"
+                strokeWidth="24"
+                className="cursor-pointer"
+              />
+              
               <line 
                 x1={start.x} y1={start.y} 
                 x2={end.x} y2={end.y} 
@@ -82,6 +92,9 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({ onSelectSefira, onSelec
               className="cursor-pointer transition-transform duration-300 hover:scale-110"
               style={{ transformOrigin: `${x}px ${y}px` }}
             >
+              {/* Invisible large circle for better touch target */}
+              <circle cx={x} cy={y} r="45" fill="transparent" />
+
               {/* Outer Glow for Active */}
               {isActive && (
                 <circle cx={x} cy={y} r="35" fill="none" stroke="white" strokeOpacity="0.3" strokeWidth="2">
